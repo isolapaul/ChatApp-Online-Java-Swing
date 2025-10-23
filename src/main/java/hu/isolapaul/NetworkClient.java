@@ -1,15 +1,5 @@
 package hu.isolapaul; // Csomagnév PONTtal
 
-import hu.isolapaul.FriendRequest;
-import hu.isolapaul.ChatApp;
-import hu.isolapaul.User;
-import hu.isolapaul.RegisterRequest;
-import hu.isolapaul.LoginRequest;
-import hu.isolapaul.ServerResponse;
-import hu.isolapaul.ChatMessage;
-import hu.isolapaul.HistoryRequest;
-import hu.isolapaul.DisconnectRequest;
-
 import javax.swing.SwingUtilities;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,10 +15,9 @@ public class NetworkClient implements Runnable {
 
     private ChatApp gui; // Referencia a GUI-ra, hogy frissíthessük
 
-    // --- MÓDOSÍTVA ---
+    
     private String serverHost;
     private int serverPort;
-    // -----------------
 
     private Socket socket;
     private ObjectOutputStream oos;
@@ -51,7 +40,7 @@ public class NetworkClient implements Runnable {
     @Override
     public void run() {
         try {
-            // 1. Csatlakozás a szerverhez (MÓDOSÍTVA)
+            // 1. Csatlakozás a szerverhez
             socket = new Socket(serverHost, serverPort);
             System.out.println("[Kliens] Sikeresen csatlakozva a szerverhez: " + serverHost + ":" + serverPort);
 
@@ -114,7 +103,7 @@ public class NetworkClient implements Runnable {
         }
     }
 
-    // --- Metódusok, amiket a GUI hív ---
+    // Metódusok, amiket a GUI hív
 
     public void sendLoginRequest(String user, String pass) {
         try {

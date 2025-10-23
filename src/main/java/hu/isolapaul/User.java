@@ -13,7 +13,7 @@ public class User implements Serializable {
 
     private String username;
     private String email;
-    private String passwordHash; // SOHA nem tárolunk sima jelszót
+    private String passwordHash; // A jelszó hash-elt formában
     private List<String> friends; // Barátok listája (felhasználónevek)
 
     public User(String username, String email, String passwordHash) {
@@ -45,7 +45,7 @@ public class User implements Serializable {
         }
     }
 
-    // A hashCode és equals fontos a gyűjtemények helyes működéséhez
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
