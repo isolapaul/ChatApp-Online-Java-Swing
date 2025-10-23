@@ -17,11 +17,11 @@ public class AuthManager {
     // Gyűjtemény: Tárolja a felhasználóneveket és a hozzájuk tartozó User objektumokat.
     // ConcurrentHashMap-et használunk, mert a szerver több szálon fogja ezt elérni.
     private Map<String, User> userDatabase;
-    private final String userDbFile = "users.dat";
+    private static final String userDbFile = "users.dat";
 
     // Jelszó erősség ellenőrző (legalább 6 karakter, 1 nagybetű, 1 szám)
     private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^(?=.*[0-9])(?=.*[A-Z]).{6,}$");
+            Pattern.compile("^(?=.*\\d)(?=.*[A-Z]).{6,}$");
 
     public AuthManager() {
         userDatabase = new ConcurrentHashMap<>();
