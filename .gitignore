@@ -1,0 +1,11 @@
+#Maven build output
+/target/
+#IDE settings
+/.vscode/
+/.idea/
+*.iml
+#Log files
+*.log
+#Users data
+*.dat
+/chat_history/
