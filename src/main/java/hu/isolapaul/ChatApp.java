@@ -26,15 +26,13 @@ public class ChatApp extends JFrame {
     private JComboBox<String> friendSelector;
 
     /**
-     * MÓDOSÍTOTT KONSTRUKTOR
      * @param serverHost A szerver címe (pl. "0.tcp.ngrok.io")
      * @param serverPort A szerver portja (pl. 19876)
      */
     public ChatApp(String serverHost, int serverPort) {
         super("SzuperChat");
 
-        // Itt hozzuk létre a hálózati klienst a MÓDOSÍTOTT adatokkal
-        // Átadjuk a hosztot és a portot is
+        
         this.networkClient = new NetworkClient(this, serverHost, serverPort);
         new Thread(networkClient).start(); // Elindítjuk a háttérszálat
 
@@ -55,16 +53,16 @@ public class ChatApp extends JFrame {
         add(mainPanel);
 
         // ===== ABLAK =====
-        setSize(500, 450); // Picit magasabb, hogy elférjenek a gombok
+        setSize(500, 450); 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Nem léphet ki simán
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                // Illedelmesen lecsatlakozunk
+                
                 if (networkClient != null) {
                     networkClient.disconnect();
                 }
-                System.exit(0); // És kilépünk
+                System.exit(0);
             }
         });
         setVisible(true);
@@ -123,7 +121,7 @@ public class ChatApp extends JFrame {
         showRegisterButton.addActionListener(e -> cardLayout.show(mainPanel, "REGISTER"));
         
         exitButton.addActionListener(e -> {
-            System.exit(0); // Nincs még kapcsolat, simán kilépünk
+            System.exit(0); 
         });
     }
 
@@ -194,26 +192,26 @@ public class ChatApp extends JFrame {
         friendSelector = new JComboBox<>(new String[]{"Barátok..."});
         chatPanel.add(friendSelector, BorderLayout.NORTH);
 
-        // --- Üzenetküldő panel ---
+        // Üzenetküldő panel
         JPanel inputPanel = new JPanel(new BorderLayout());
         JTextField messageField = new JTextField();
         JButton sendButton = new JButton("Küldés");
         inputPanel.add(messageField, BorderLayout.CENTER);
         inputPanel.add(sendButton, BorderLayout.EAST);
         
-        // --- Barátfelvételi panel ---
+        // Barátfelvételi panel 
         JPanel friendPanel = new JPanel(new BorderLayout());
         JTextField friendField = new JTextField("Felhasználónév");
         JButton addFriendButton = new JButton("Barát felvétele");
         friendPanel.add(friendField, BorderLayout.CENTER);
         friendPanel.add(addFriendButton, BorderLayout.EAST);
 
-        // --- Kilépés panel ---
+        // Kilépés panel 
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton logoutButton = new JButton("Kijelentkezés és Kilépés");
         exitPanel.add(logoutButton);
         
-        // --- Alsó panel (három panellel) ---
+        // Alsó panel (három panellel) 
         JPanel bottomPanel = new JPanel(new GridLayout(3, 1));
         bottomPanel.add(inputPanel);
         bottomPanel.add(friendPanel);
@@ -221,9 +219,9 @@ public class ChatApp extends JFrame {
         
         chatPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        // ===== ESEMÉNYKEZELŐK =====
+        // ESEMÉNYKEZELŐK 
 
-        // Küldés gomb és Enter listener
+        // Küldés gomb
         ActionListener sendAction = e -> {
             String text = messageField.getText().trim();
             if (text.isEmpty()) return;
@@ -274,7 +272,7 @@ public class ChatApp extends JFrame {
         });
     }
 
-    // --- Metódusok, amiket a NetworkClient hívogat (GUI frissítés) ---
+    // Metódusok, amiket a NetworkClient hívogat 
 
     public void onLoginSuccess(User user) {
         this.currentUser = user;
@@ -322,7 +320,7 @@ public class ChatApp extends JFrame {
     }
     
     /**
-     * Segédmetódus a barátlista (JComboBox) frissítésére
+     * Segédmetódus a barátlista frissítésére
      */
     private void updateFriendList(User user) {
         friendSelector.removeAllItems();
@@ -336,9 +334,7 @@ public class ChatApp extends JFrame {
         }
     }
 
-    /**
-     * AZ ÚJ, FONTOS MAIN METÓDUS (MÓDOSÍTVA)
-     */
+    
     public static void main(String[] args) {
         // 1. Bekérjük a HOSZT-ot
         String serverHost = JOptionPane.showInputDialog(
